@@ -3,6 +3,7 @@ package com.example.demo.dao;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -23,6 +24,6 @@ public class Location {
 	
 	private String name;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	private Collection<Box> boxes;
 }

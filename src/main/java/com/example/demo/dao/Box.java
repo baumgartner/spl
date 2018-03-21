@@ -3,6 +3,7 @@ package com.example.demo.dao;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -22,6 +23,6 @@ public class Box {
 	@Enumerated(EnumType.STRING)
 	private BoxStatus status;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Location location;
 }
