@@ -55,11 +55,9 @@ public class OverviewController {
 		bookEntryRepository.save(bookEntry);
 		box.setStatus(BoxStatus.DEPOSIT);
 		
-		// ONSUCCESS
+		boxRepository.save(box);
+		
 		model.addAttribute("success", "Booked");
-
-		// ONERROR
-		// model.addAttribute("alert", "alert");
 
 		return "box";
 	}
