@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dao.BookEntry;
+import com.example.demo.dao.BookEntryStatus;
 import com.example.demo.dao.Box;
 import com.example.demo.dao.BoxStatus;
 import com.example.demo.dao.Location;
@@ -45,7 +46,7 @@ public class OverviewController {
 		Location location = loadLocation(locationId, model);
 		Box box = loadBox(boxId, model);
 
-		BookEntry bookEntry = new BookEntry(null, box, getLoggedInUser(principal), code);
+		BookEntry bookEntry = new BookEntry(null, box, getLoggedInUser(principal), code, BookEntryStatus.RUNNING);
 
 		bookEntryRepository.save(bookEntry);
 		box.setStatus(BoxStatus.DEPOSIT);
@@ -68,15 +69,14 @@ public class OverviewController {
 		Location location = loadLocation(locationId, model);
 		Box box = loadBox(boxId, model);
 		
-		// TODO: check if box has a pendingt BookEntry
-		// TODO: check Code
-		// TODO: finish booking
-		
-		BookEntry bookEntry = bookEntryRepository.findById(new Integer(1)).get();
+		BookEntry bookEntry = bookEntryRepository.findByBoxAndStatus(box, BookEntryStatus.RUNNING);
 		
 		if (bookEntry.getPin().equals(code)) {
 			box.setStatus(BoxStatus.FREE);
 			boxRepository.save(box);
+			
+			bookEntry.setStatus(BookEntryStatus.FINISHED);
+			bookEntryRepository.save(bookEntry);
 
 			// ONSUCCESS
 			model.addAttribute("success", "Unlocked");
