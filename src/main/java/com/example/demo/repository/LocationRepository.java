@@ -11,6 +11,6 @@ import com.example.demo.dao.User;
 @Repository
 public interface LocationRepository extends JpaRepository<Location, String>{
 	
-	Collection<Location> findAllByUser(User user);
+	Collection<Location> findAllByOwner(User user);
 
 }
