@@ -16,13 +16,11 @@
    <table class="table table-hover">
     <tr>
     	<th>Name</th>
-    	<th>Boxes (Free)</th>
-    	<th>Action</th>
+    	<th>Free (Total)</th>
     </tr>
      <tr th:each="location: ${locations}">
-      <td th:text="${location.name}"></td>
-      <td th:text="${location.boxes.size()}+' ('+${location.freeBoxes} + ')'"></td>
-      <td><a th:href="'/SPB/locations/'+${location.id}">Browse</a></td>
+      <td><a th:href="'/SPB/locations/'+${location.id}" th:text="${location.name}"></a></td>
+      <td th:text="${location.freeBoxes}+' ('+${location.boxes.size()} + ')'"></td>
     </tr>
     </table>
 </body>

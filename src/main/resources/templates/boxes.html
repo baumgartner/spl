@@ -1,36 +1,38 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>SPB - Smart Public Boxes</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"></link>
+<title>SPB - Smart Public Boxes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"></link>
 </head>
 <body>
-  
-   <nav aria-label="breadcrumb">
-	  <ol class="breadcrumb">
-	    <li class="breadcrumb-item"><a href="/SPB/locations">Locations</a></li>
-	    <li class="breadcrumb-item active" aria-current="page" th:text="${location.name}"></li>
-	  </ol>
+
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="/SPB/locations">Locations</a></li>
+			<li class="breadcrumb-item active" aria-current="page"
+				th:text="${location.name}"></li>
+		</ol>
 	</nav>
-    
-    <table class="table table-hover">
-    <tr>
-    	<th>ID</th>
-    	<th>Status</th>
-    	<th>Action</th>
-    </tr>
-     <tr th:each="box: ${location.boxes}">
-      <td th:text="${box.id}"></td>
-      <td th:text="${box.status}"></td>
-      <td th:switch="${box.status.name()}">
-      	<a th:case="FREE" th:href="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}">Book</a>
-      	<a th:case="BOOKED" th:href="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}">Unlock</a>
-      	<p th:case="*" th:text="UNAVAILABLE" /> 
-      </td>
-    </tr>
-    </table>
+
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="box: ${location.boxes}" th:style="'background-color: ' + ${box.status.name() == 'FREE' ? '#dff0d8' : '#f2dede'}">
+				<td th:if="${box.status.name() != 'DEPOSIT'}"><a th:text="${box.id}" th:href="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}"></a></td>
+				<td th:if="${box.status.name() == 'DEPOSIT'}" th:text="${box.id}"></td>
+				<td th:text="${box.status}"></td>
+			</tr>
+		</tbody>
+	</table>
 </body>
 </html>
