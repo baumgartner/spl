@@ -1,5 +1,7 @@
 package com.example.demo.dao;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -7,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,11 +28,12 @@ public class BookEntry {
 	@ManyToOne
 	private Box box; 
 	
-//	private Date from; 
-//	
-//	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-//	private DateTime to;
-//	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fromDate; 
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date toDate;
+	
 	@ManyToOne
 	private User user;
 	

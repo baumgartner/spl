@@ -1,6 +1,7 @@
 package com.example.demo.web;
 
 import java.security.Principal;
+import java.sql.Timestamp;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +55,7 @@ public class OverviewController {
 		Location location = loadLocation(locationId, model);
 		Box box = loadBox(boxId, model);
 
-		BookEntry bookEntry = new BookEntry(null, box, getLoggedInUser(principal), code, BookEntryStatus.RUNNING);
+		BookEntry bookEntry = new BookEntry(null, box ,new Timestamp(System.currentTimeMillis()), null, getLoggedInUser(principal), code, BookEntryStatus.RUNNING);
 
 		bookEntryRepository.save(bookEntry);
 		box.setStatus(BoxStatus.DEPOSIT);
