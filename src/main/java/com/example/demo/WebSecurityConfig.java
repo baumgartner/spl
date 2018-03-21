@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.example.demo.dao.User;
 import com.example.demo.repository.UserRepository;
@@ -25,10 +26,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests()
-//		.antMatchers("/SPB").permitAll().anyRequest().authenticated()
-//		.antMatchers("/webjars", "/external").anonymous()
-//		.and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
 		http.authorizeRequests()
         .antMatchers("/login**").permitAll()
         .antMatchers("/external**").permitAll()
@@ -38,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .formLogin().loginPage("/login").failureUrl("/login?error")
                 .usernameParameter("username").passwordParameter("password")
         .and()
-            .logout().logoutSuccessUrl("/login?logout")
+            .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
         .and()
             .exceptionHandling().accessDeniedPage("/403");
 	}
