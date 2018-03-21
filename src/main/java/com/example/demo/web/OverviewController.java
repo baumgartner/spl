@@ -21,7 +21,7 @@ public class OverviewController {
 	private BoxRepository boxRepository;
 	
 	@Autowired
-	private LocationRepository LocationRepository;
+	private LocationRepository locationRepository;
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -69,19 +69,20 @@ public class OverviewController {
 	
 	@GetMapping("/SPB/locations")
 	public String locations(Model model) {
-		// TODO: locationDao.list
-		return "list";
+		model.addAttribute("locations", locationRepository.findAll());
+		
+		return "locations";
 	}
 	
 	@GetMapping("/SPB/location/{locationId}/boxes")
 	public String boxes(@PathVariable String locationId, Model model) {
-		loadLocation(locationId, model);	
-		
+		Location location = loadLocation(locationId, model);	
+		boxRepository.findByLocation(location);		
 		return "boxes";
 	}
 	
 	private Location loadLocation(String locationId, Model model) {
-		final Location location = LocationRepository.findById(locationId).get();
+		final Location location = locationRepository.findById(locationId).get();
 		
 		model.addAttribute("location", location);
 		

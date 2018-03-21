@@ -1,10 +1,10 @@
 package com.example.demo.dao;
 
-import java.util.List;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 
@@ -17,6 +17,6 @@ public class Location {
 	
 	private String name;
 
-	@ManyToOne
-	private List<Box> boxes;
+	@OneToMany
+	private Collection<Box> boxes;
 }
