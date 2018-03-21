@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.dao.Location;
 import com.example.demo.repository.BookEntryRepository;
 import com.example.demo.repository.BoxRepository;
 import com.example.demo.repository.LocationRepository;
@@ -42,19 +43,23 @@ public class OverviewController {
 		return "success";
 	}
 	
-	@PostMapping("/SPB/locations/{location}/boxes/{box}/book")
-	public String book(@PathVariable String location,
+	@PostMapping("/SPB/locations/{locationId}/boxes/{box}/book")
+	public String book(@PathVariable String locationId,
 			@PathVariable String box,
 			@RequestParam(name = "code", required = true) String code, Model model) {
+		Location location = loadLocation(locationId, model);
 		// TODO: create BookEntry
 		// 
 		return "book";
 	}
 	
-	@PostMapping("/SPB/locations/{location}/boxes/{box}/unlock")
-	public String unlock(@PathVariable String location,
+	@PostMapping("/SPB/locations/{locationId}/boxes/{box}/unlock")
+	public String unlock(@PathVariable String locationId,
 			@PathVariable String box,
 			@RequestParam(name = "code", required = true) String code, Model model) {
+		
+		Location location = loadLocation(locationId, model);
+		
 		// TODO: check if box has a pendingt BookEntry
 		// TODO: check Code
 		// TODO: send 
@@ -68,10 +73,19 @@ public class OverviewController {
 		return "list";
 	}
 	
-	@GetMapping("/SPB/location/{location}/boxes")
-	public String boxes(@PathVariable String location, Model model) {
-		// TODO: boxes.list(location)
+	@GetMapping("/SPB/location/{locationId}/boxes")
+	public String boxes(@PathVariable String locationId, Model model) {
+		loadLocation(locationId, model);	
+		
 		return "boxes";
+	}
+	
+	private Location loadLocation(String locationId, Model model) {
+		final Location location = LocationRepository.findById(locationId).get();
+		
+		model.addAttribute("location", location);
+		
+		return location;
 	}
 			
 }

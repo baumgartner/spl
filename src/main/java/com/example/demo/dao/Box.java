@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
@@ -17,5 +18,6 @@ public class Box {
 	@Enumerated(EnumType.STRING)
 	private BoxStatus status;
 	
-	private String adresse;
+	@ManyToOne
+	private Location location;
 }
