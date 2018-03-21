@@ -16,32 +16,22 @@
 <body>
 	<div th:if="${param.error}">Invalid username and password.</div>
 	<div th:if="${param.logout}">You have been logged out.</div>
-	
+
 	<form th:action="@{/login}" method="post">
 		<div class="form-group">
-			<div class="cols-sm-10">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-user fa"
-						aria-hidden="true"></i></span> <input type="text" class="form-control"
-						name="username" id="username" placeholder="Username" />
-				</div>
+			<input type="text" class="form-control" name="username" id="username"
+				placeholder="Username" />
+		</div>
+
+		<div class="form-group">
+			<div class="input-group">
+				<input type="password" class="form-control" name="password"
+					id="password" placeholder="Password" />
 			</div>
 		</div>
 
 		<div class="form-group">
-			<div class="cols-sm-10">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-user fa"
-						aria-hidden="true"></i></span> <input type="password"
-						class="form-control" name="password" id="password"
-						placeholder="Password" />
-				</div>
-			</div>
-		</div>
-		
-		<div class="form-group">
-			<input type="submit" class="form-control" id="confirm"
-				value="Login" />
+			<input type="submit" class="form-control" id="confirm" value="Login" />
 
 		</div>
 	</form>
