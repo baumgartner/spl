@@ -22,14 +22,14 @@ public class TestDataInserter implements InitializingBean {
 	public void afterPropertiesSet() throws Exception {
 
 		Location hauptplatz = new Location("HAU", "Hauptplatz", null);
-		Location rathaus = new Location("RAT", "Rathaus", null);
+		Location rathaus = new Location("BHF", "Bahnhof", null);
 		locationRepository.save(hauptplatz);
 		locationRepository.save(rathaus);
 
 		Box box1 = new Box("HAU001", BoxStatus.FREE, hauptplatz);
 		Box box2 = new Box("HAU002", BoxStatus.FREE, hauptplatz);
-		Box box3 = new Box("RAT001", BoxStatus.FREE, rathaus);
-		Box box4 = new Box("RAT002", BoxStatus.FREE, rathaus);
+		Box box3 = new Box("BHF001", BoxStatus.FREE, rathaus);
+		Box box4 = new Box("BHF002", BoxStatus.FREE, rathaus);
 		
 		boxRepository.save(box1);
 		boxRepository.save(box2);
