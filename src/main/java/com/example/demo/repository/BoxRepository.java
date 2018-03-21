@@ -11,4 +11,6 @@ import com.example.demo.dao.Location;
 @Repository
 public interface BoxRepository extends JpaRepository<Box, String>{
 	Collection<Box> findByLocation(Location location);
+	Box findByIdAndLocation(String id, Location location);
+	Box findByIdAndLocationId(String id, String locationId);
 }
