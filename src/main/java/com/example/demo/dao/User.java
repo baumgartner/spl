@@ -9,11 +9,12 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Auto {
+public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private String username;
 
-	private String color;
+	private String password;
+
 }
