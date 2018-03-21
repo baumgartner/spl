@@ -67,7 +67,7 @@ public class BoxController {
 				findByBoxAndStatus.setStatus(BookEntryStatus.FINISHED);
 				bookEntryRepository.save(findByBoxAndStatus);
 			}
-			logger.info("box-pressed: {}", box);
+			logger.info("reset: {}", box);
 			
 			box.setStatus(BoxStatus.FREE);
 			
