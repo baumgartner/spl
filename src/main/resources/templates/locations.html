@@ -13,12 +13,29 @@
 	    <li class="breadcrumb-item active" aria-current="page">Locations</li>
 	  </ol>
 	</nav>
+	<div th:if="${privateLocations.size() > 0}">
+	<h2>Private Locations</h2>
+	
    <table class="table table-hover">
     <tr>
     	<th>Name</th>
     	<th>Free (Total)</th>
     </tr>
-     <tr th:each="location: ${locations}">
+     <tr th:each="location: ${privateLocations}">
+      <td><a th:href="'/SPB/locations/'+${location.id}" th:text="${location.name}"></a></td>
+      <td th:text="${location.freeBoxes}+' ('+${location.boxes.size()} + ')'"></td>
+    </tr>
+    </table>
+    </div>
+    
+    <h2>Public Locations</h2>
+	
+   <table class="table table-hover">
+    <tr>
+    	<th>Name</th>
+    	<th>Free (Total)</th>
+    </tr>
+     <tr th:each="location: ${publicLocations}">
       <td><a th:href="'/SPB/locations/'+${location.id}" th:text="${location.name}"></a></td>
       <td th:text="${location.freeBoxes}+' ('+${location.boxes.size()} + ')'"></td>
     </tr>

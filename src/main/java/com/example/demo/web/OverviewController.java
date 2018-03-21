@@ -2,12 +2,14 @@ package com.example.demo.web;
 
 import java.security.Principal;
 import java.sql.Timestamp;
+import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,11 +52,18 @@ public class OverviewController {
 	@PostMapping("/SPB/locations/{locationId}/boxes/{boxId}/book")
 	public String book(@PathVariable String locationId, @PathVariable String boxId,
 			@RequestParam(name = "code", required = true) String code, Model model, Principal principal) {
+		
 		loadLocation(locationId, model);
 		Box box = loadBox(boxId, model);
+		
+		if (StringUtils.isEmpty(code)) {
+			model.addAttribute("alert", "alert");
+			return "box";
+		}
 
 		BookEntry bookEntry = new BookEntry(null, box ,new Timestamp(System.currentTimeMillis()), null, getLoggedInUser(principal), code, BookEntryStatus.RUNNING);
 
+		bookEntry.setFromDate(new Date());
 		bookEntryRepository.save(bookEntry);
 		box.setStatus(BoxStatus.DEPOSIT);
 		
@@ -64,7 +73,7 @@ public class OverviewController {
 
 		return "box";
 	}
-
+	
 	private User getLoggedInUser(Principal principal) {
 		return userRepository.findById(principal.getName()).get();
 	}
@@ -83,10 +92,12 @@ public class OverviewController {
 			boxRepository.save(box);
 			
 			bookEntry.setStatus(BookEntryStatus.FINISHED);
+			bookEntry.setToDate(new Date());
 			bookEntryRepository.save(bookEntry);
 
 			// ONSUCCESS
 			model.addAttribute("success", "Unlocked");
+			model.addAttribute("ms", (bookEntry.getToDate().getTime() - bookEntry.getFromDate().getTime()) / 1000);
 		} else {
 			model.addAttribute("alert", "invalid code");
 		}
@@ -97,8 +108,8 @@ public class OverviewController {
 	@GetMapping("/SPB/locations")
 	public String locations(Model model, Principal principal) {
 		logger.info("Principal: {}", principal.getName());
-		model.addAttribute("locations", locationRepository.findAll());
-
+		model.addAttribute("publicLocations", locationRepository.findAll());
+		model.addAttribute("privateLocations", locationRepository.findAllByUser(getLoggedInUser(principal)));
 		return "locations";
 	}
 

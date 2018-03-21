@@ -23,6 +23,11 @@
 		<div class="alert alert-success" th:if="${success}">
 			<strong>Success!</strong> Please open the box now.
 		</div>
+		
+		<div class="alert alert-info" th:if="${ms}">
+			<strong>Thank You!</strong> you booked the Box for <span th:text="${ms}" /> seconds.
+		</div>
+		
 		<div class="alert alert-danger" th:if="${alert}">
 			<strong>Danger!</strong> Invalid code.
 		</div>
