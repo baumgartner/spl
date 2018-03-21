@@ -27,7 +27,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="box: ${location.boxes}" th:style="'background-color: ' + ${box.status.name() == 'FREE' ? '#dff0d8' : '#f2dede'}">
+		<tr th:each="box: ${location.boxes}" th:class="${box.status.css}">
+<!-- 			<tr th:each="box: ${location.boxes}" th:style="'background-color: ' + ${box.status.name() == 'FREE' ? '#dff0d8' : '#f2dede'}"> -->
 				<td th:if="${box.status.name() != 'DEPOSIT'}"><a th:text="${box.id}" th:href="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}"></a></td>
 				<td th:if="${box.status.name() == 'DEPOSIT'}" th:text="${box.id}"></td>
 				<td th:text="${box.status}"></td>
