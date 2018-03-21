@@ -7,5 +7,7 @@ import com.example.demo.dao.Location;
 
 @Repository
 public interface LocationRepository extends JpaRepository<Location, String>{
+	
+	
 
 }
