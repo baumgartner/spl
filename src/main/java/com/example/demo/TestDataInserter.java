@@ -49,12 +49,14 @@ public class TestDataInserter implements InitializingBean {
 		Box box3 = new Box("BHF001", BoxStatus.FREE, rathaus);
 		Box box4 = new Box("BHF002", BoxStatus.FREE, rathaus);
 		Box box5 = new Box("BHF003", BoxStatus.FREE, rathaus);
+		Box box6 = new Box("LFR001", BoxStatus.FREE, rathaus);
 		
 		boxRepository.save(box1);
 		boxRepository.save(box2);
 		boxRepository.save(box3);
 		boxRepository.save(box4);
 		boxRepository.save(box5);
+		boxRepository.save(box6);
 	}
 
 }
