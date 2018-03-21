@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.dao.Box;
 import com.example.demo.dao.Location;
 import com.example.demo.repository.BookEntryRepository;
 import com.example.demo.repository.BoxRepository;
@@ -16,18 +17,18 @@ import com.example.demo.repository.UserRepository;
 
 @Controller
 public class OverviewController {
-//	
-//	@Autowired
-//	private BoxRepository boxRepository;
-//	
-//	@Autowired
-//	private LocationRepository locationRepository;
-//	
-//	@Autowired
-//	private UserRepository userRepository;
-//	
-//	@Autowired
-//	private BookEntryRepository bookEntryRepository;
+	
+	@Autowired
+	private BoxRepository boxRepository;
+	
+	@Autowired
+	private LocationRepository locationRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private BookEntryRepository bookEntryRepository;
 	
 	@GetMapping("/greeting")
 	public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
@@ -77,17 +78,30 @@ public class OverviewController {
 	@GetMapping("/SPB/location/{locationId}/boxes")
 	public String boxes(@PathVariable String locationId, Model model) {
 		Location location = loadLocation(locationId, model);	
-//		boxRepository.findByLocation(location);		
+		boxRepository.findByLocation(location);		
 		return "boxes";
 	}
 	
+	@GetMapping("/SPB/location/{locationId}/boxes/{boxId}")
+	public String box(@PathVariable String locationId, @PathVariable String boxId, Model model) {
+		Location location = loadLocation(locationId, model);	
+		Box box = loadBox(boxId, model);
+		return "box";
+	}
+	
 	private Location loadLocation(String locationId, Model model) {
-		//final Location location = locationRepository.findById(locationId).get();
-		Location location = new Location();
-		location.setName("myTest");
+		final Location location = locationRepository.findById(locationId).get();
+
 		model.addAttribute("location", location);
 		
 		return location;
 	}
-			
+	
+	private Box loadBox(String boxId, Model model) {
+		final Box box = boxRepository.findById(boxId).get();
+		
+		model.addAttribute("box", box);
+		
+		return box;
+	}
 }
