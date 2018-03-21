@@ -1,5 +1,9 @@
 package com.example.demo.web;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +22,8 @@ import com.example.demo.repository.UserRepository;
 @Controller
 public class OverviewController {
 	
+	Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	private BoxRepository boxRepository;
 	
@@ -30,12 +36,12 @@ public class OverviewController {
 	@Autowired
 	private BookEntryRepository bookEntryRepository;
 	
-	@GetMapping("/greeting")
-	public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
-			Model model) {
-		model.addAttribute("name", name);
-		return "greeting";
-	}
+//	@GetMapping("/greeting")
+//	public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
+//			Model model) {
+//		model.addAttribute("name", name);
+//		return "greeting";
+//	}
 	
 	@PostMapping("/login")
 	public String login(@RequestParam(name = "username", required = true) String username, 
@@ -44,14 +50,15 @@ public class OverviewController {
 		return "success";
 	}
 	
-	@PostMapping("/SPB/locations/{locationId}/boxes/{box}/book")
+	@PostMapping("/SPB/locations/{locationId}/boxes/{boxId}/book")
 	public String book(@PathVariable String locationId,
-			@PathVariable String box,
+			@PathVariable String boxId,
 			@RequestParam(name = "code", required = true) String code, Model model) {
 		Location location = loadLocation(locationId, model);
+		Box box = loadBox(boxId, model);
 		// TODO: create BookEntry
 		// 
-		return "book";
+		return "box";
 	}
 	
 	@PostMapping("/SPB/locations/{locationId}/boxes/{box}/unlock")
@@ -74,15 +81,15 @@ public class OverviewController {
 		
 		return "locations";
 	}
-	
-	@GetMapping("/SPB/location/{locationId}/boxes")
-	public String boxes(@PathVariable String locationId, Model model) {
+		
+	@GetMapping("/SPB/locations/{locationId}")
+	public String location(@PathVariable String locationId, Model model) {
 		Location location = loadLocation(locationId, model);	
-		boxRepository.findByLocation(location);		
+		logger.info("LOCATION- Boxes: " + location.getBoxes().size());
 		return "boxes";
 	}
 	
-	@GetMapping("/SPB/location/{locationId}/boxes/{boxId}")
+	@GetMapping("/SPB/locations/{locationId}/boxes/{boxId}")
 	public String box(@PathVariable String locationId, @PathVariable String boxId, Model model) {
 		Location location = loadLocation(locationId, model);	
 		Box box = loadBox(boxId, model);

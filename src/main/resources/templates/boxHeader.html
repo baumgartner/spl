@@ -1,16 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"></link>
 </head>
 <body>
-    <div th:fragment="boxTitle">
+    <div th:fragment="boxHeader">
     	 <h2 th:text="'Welcome to ' + ${box.id} + '!'" />
     	 
-    	 <p th:text="currently the box is in status '${box.status}'" />
+    	 <p th:text="'currently the box is in status ' + ${box.status}" />
     </div>
 </body>
 </html>

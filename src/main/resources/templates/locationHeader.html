@@ -1,13 +1,9 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"></link>
 </head>
 <body>
-    <div th:fragment="locationTitle">
+    <div th:fragment="locationHeader">
     	 <h1 th:text="'Welcome to ' + ${location.name} + '!'" />
     </div>
 </body>
