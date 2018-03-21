@@ -1,5 +1,7 @@
 package com.example.demo.web;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dao.Box;
+import com.example.demo.dao.BoxStatus;
 import com.example.demo.repository.BoxRepository;
 
 @RestController
@@ -21,7 +24,7 @@ public class BoxController {
 	@Autowired
 	private BoxRepository boxRepository;
 
-	@RequestMapping(value = "/external/command/{location}/{box}")
+	@RequestMapping(value = "/external/state/{location}/{box}")
 	public Map<String, String> action(@PathVariable(name = "location") String locationId,
 			@PathVariable(name = "box") String boxId) {
 		Map<String, String> action = new HashMap<>();
@@ -33,6 +36,20 @@ public class BoxController {
 		action.put("state", box.getStatus().name());
 
 		return action;
+	}
+	
+	
+	@RequestMapping(value = "/external/button/{location}/{box}")
+	public void buttonPressed(@PathVariable(name = "location") String locationId,
+			@PathVariable(name = "box") String boxId) {
+			Box box = boxRepository.findByIdAndLocationId(boxId, locationId);
+			
+			if(box.getStatus().equals(BoxStatus.DEPOSIT)) {
+				box.setStatus(BoxStatus.BOOKED);
+			} else {
+				throw new IllegalStateException();
+			}
+			boxRepository.save(box);
 	}
 
 }
