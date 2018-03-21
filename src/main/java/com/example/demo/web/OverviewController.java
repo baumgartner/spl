@@ -77,7 +77,7 @@ public class OverviewController {
 	
 	@GetMapping("/SPB/locations")
 	public String locations(Model model) {
-//		model.addAttribute("locations", locationRepository.findAll());
+		model.addAttribute("locations", locationRepository.findAll());
 		
 		return "locations";
 	}
