@@ -16,18 +16,18 @@ import com.example.demo.repository.UserRepository;
 
 @Controller
 public class OverviewController {
-	
-	@Autowired
-	private BoxRepository boxRepository;
-	
-	@Autowired
-	private LocationRepository locationRepository;
-	
-	@Autowired
-	private UserRepository userRepository;
-	
-	@Autowired
-	private BookEntryRepository bookEntryRepository;
+//	
+//	@Autowired
+//	private BoxRepository boxRepository;
+//	
+//	@Autowired
+//	private LocationRepository locationRepository;
+//	
+//	@Autowired
+//	private UserRepository userRepository;
+//	
+//	@Autowired
+//	private BookEntryRepository bookEntryRepository;
 	
 	@GetMapping("/greeting")
 	public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
@@ -69,7 +69,7 @@ public class OverviewController {
 	
 	@GetMapping("/SPB/locations")
 	public String locations(Model model) {
-		model.addAttribute("locations", locationRepository.findAll());
+//		model.addAttribute("locations", locationRepository.findAll());
 		
 		return "locations";
 	}
@@ -77,13 +77,14 @@ public class OverviewController {
 	@GetMapping("/SPB/location/{locationId}/boxes")
 	public String boxes(@PathVariable String locationId, Model model) {
 		Location location = loadLocation(locationId, model);	
-		boxRepository.findByLocation(location);		
+//		boxRepository.findByLocation(location);		
 		return "boxes";
 	}
 	
 	private Location loadLocation(String locationId, Model model) {
-		final Location location = locationRepository.findById(locationId).get();
-		
+		//final Location location = locationRepository.findById(locationId).get();
+		Location location = new Location();
+		location.setName("myTest");
 		model.addAttribute("location", location);
 		
 		return location;
