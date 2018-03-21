@@ -45,9 +45,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public UserDetailsService userDetailsService() {
 
 		Collection<User> users = new ArrayList<>();
+		
 		users.add(new User("florian", "florian"));
 		users.add(new User("jakob", "jakob"));
 		users.add(new User("martin", "martin"));
+		users.add(new User("franz", "franz"));
 
 		userRepository.saveAll(users);
 
