@@ -1,7 +1,13 @@
 package com.example.demo.web;
 
+<<<<<<< Updated upstream
 import java.security.Principal;
 
+=======
+import java.util.Date;
+
+import org.joda.time.DateTime;
+>>>>>>> Stashed changes
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +50,9 @@ public class OverviewController {
 			@RequestParam(name = "code", required = true) String code, Model model, Principal principal) {
 		Location location = loadLocation(locationId, model);
 		Box box = loadBox(boxId, model);
-		// TODO: create BookEntry
-	
+
 		BookEntry bookEntry = new BookEntry(null, box, getLoggedInUser(principal), code);
+
 		bookEntryRepository.save(bookEntry);
 		box.setStatus(BoxStatus.DEPOSIT);
 		
@@ -61,22 +67,28 @@ public class OverviewController {
 		return userRepository.findById(principal.getName()).get();
 	}
 
-	@PostMapping("/SPB/locations/{locationId}/boxes/{box}/unlock")
-	public String unlock(@PathVariable String locationId, @PathVariable String box,
+	@PostMapping("/SPB/locations/{locationId}/boxes/{boxId}/unlock")
+	public String unlock(@PathVariable String locationId, @PathVariable String boxId,
 			@RequestParam(name = "code", required = true) String code, Model model) {
 
 		Location location = loadLocation(locationId, model);
-		model.addAttribute("alert", "Invalid Code inserted");
+		Box box = loadBox(boxId, model);
+		
 		// TODO: check if box has a pendingt BookEntry
 		// TODO: check Code
-		// TODO: send
 		// TODO: finish booking
+		
+		BookEntry bookEntry = bookEntryRepository.findById(new Integer(1)).get();
+		
+		if (bookEntry.getPin().equals(code)) {
+			box.setStatus(BoxStatus.FREE);
+			boxRepository.save(box);
 
-		// ONSUCCESS
-		model.addAttribute("success", "Booked");
-
-		// ONERROR
-		// model.addAttribute("alert", "alert");
+			// ONSUCCESS
+			model.addAttribute("success", "Unlocked");
+		} else {
+			model.addAttribute("alert", "invalid code");
+		}
 
 		return "box";
 	}

@@ -6,6 +6,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,11 +27,14 @@ public class BookEntry {
 	
 //	private Date from; 
 //	
-//	private Date to;
-	
+//	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+//	private DateTime to;
+//	
 	@ManyToOne
 	private User user;
 	
 	private String pin; 
+	
+//	private 
 
 }
