@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Getting Started: Serving Web Content</title>
+<title>SPB - Smart Public Box</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
@@ -13,7 +13,6 @@
 	
 	<form method="post" th:action="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}+'/book'">
 		<div class="form-group">
-			<label for="name" class="cols-sm-2 control-label">CODE</label>
 			<div class="cols-sm-10">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-user fa"
@@ -24,7 +23,7 @@
 		</div>
 
 		<div class="form-group ">
-			<input type="submit" class="form-control" name="Buchen" id="confirm" />
+			<input type="submit" class="form-control" name="Buchen" id="confirm" value="UNLOCK"/>
 		</div>
 	</form>
 

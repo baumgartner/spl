@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>SPB - Smart Public Boxes</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"></link>
@@ -9,9 +9,17 @@
 <body>
    <div th:insert="locationHeader"></div>
     <p th:text="'currently we have ' + ${location.boxes.size()} + ' boxes'" />
-    <table>
+    
+    <table class="table table-hover">
+    <tr>
+    	<th>ID</th>
+    	<th>Status</th>
+    	<th>Action</th>
+    </tr>
      <tr th:each="box: ${location.boxes}">
-      <td th:text="${box.name}">Oranges</td>
+      <td th:text="${box.id}"></td>
+      <td th:text="${box.status}"></td>
+      <td><a th:href="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}">Book</a></td>
     </tr>
     </table>
 </body>
