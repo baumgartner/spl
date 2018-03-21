@@ -28,5 +28,7 @@ public class BookEntry {
 	
 	@ManyToOne
 	private User user;
+	
+	private String pin; 
 
 }
