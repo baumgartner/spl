@@ -24,6 +24,6 @@ public class Location {
 	
 	private String name;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="location")
 	private Collection<Box> boxes;
 }
