@@ -111,7 +111,7 @@ public class OverviewController {
 	public String locations(Model model, Principal principal) {
 		logger.info("Principal: {}", principal.getName());
 		model.addAttribute("publicLocations", locationRepository.findAll());
-		model.addAttribute("privateLocations", locationRepository.findAllByUser(getLoggedInUser(principal)));
+		model.addAttribute("privateLocations", locationRepository.findAllByOwner(getLoggedInUser(principal)));
 		return "locations";
 	}
 
