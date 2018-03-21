@@ -1,5 +1,7 @@
 package com.example.demo.web;
 
+import java.security.Principal;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,20 +39,14 @@ public class OverviewController {
 	@Autowired
 	private BookEntryRepository bookEntryRepository;
 
-	@PostMapping("/login")
-	public String login(@RequestParam(name = "username", required = true) String username,
-			@RequestParam(name = "password", required = true) String password, Model model) {
-		return "success";
-	}
-
 	@PostMapping("/SPB/locations/{locationId}/boxes/{boxId}/book")
 	public String book(@PathVariable String locationId, @PathVariable String boxId,
-			@RequestParam(name = "code", required = true) String code, Model model) {
+			@RequestParam(name = "code", required = true) String code, Model model, Principal principal) {
 		Location location = loadLocation(locationId, model);
 		Box box = loadBox(boxId, model);
 		// TODO: create BookEntry
 	
-		BookEntry bookEntry = new BookEntry(null, box, getLoggedInUser(), code);
+		BookEntry bookEntry = new BookEntry(null, box, getLoggedInUser(principal), code);
 		bookEntryRepository.save(bookEntry);
 		box.setStatus(BoxStatus.DEPOSIT);
 		
@@ -61,8 +57,8 @@ public class OverviewController {
 		return "box";
 	}
 
-	private User getLoggedInUser() {
-		return userRepository.findById("florian").get();
+	private User getLoggedInUser(Principal principal) {
+		return userRepository.findById(principal.getName()).get();
 	}
 
 	@PostMapping("/SPB/locations/{locationId}/boxes/{box}/unlock")
@@ -86,7 +82,8 @@ public class OverviewController {
 	}
 
 	@GetMapping("/SPB/locations")
-	public String locations(Model model) {
+	public String locations(Model model, Principal principal) {
+		logger.info("Principal: {}", principal.getName());
 		model.addAttribute("locations", locationRepository.findAll());
 
 		return "locations";

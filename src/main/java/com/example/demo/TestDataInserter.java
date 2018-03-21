@@ -7,10 +7,8 @@ import org.springframework.stereotype.Component;
 import com.example.demo.dao.Box;
 import com.example.demo.dao.BoxStatus;
 import com.example.demo.dao.Location;
-import com.example.demo.dao.User;
 import com.example.demo.repository.BoxRepository;
 import com.example.demo.repository.LocationRepository;
-import com.example.demo.repository.UserRepository;
 
 @Component
 public class TestDataInserter implements InitializingBean {
@@ -19,8 +17,6 @@ public class TestDataInserter implements InitializingBean {
 	private LocationRepository locationRepository;
 	@Autowired
 	private BoxRepository boxRepository;
-	@Autowired
-	private UserRepository userRepository;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -34,18 +30,12 @@ public class TestDataInserter implements InitializingBean {
 		Box box2 = new Box("HAU002", BoxStatus.FREE, hauptplatz);
 		Box box3 = new Box("RAT001", BoxStatus.FREE, rathaus);
 		Box box4 = new Box("RAT002", BoxStatus.FREE, rathaus);
+		
 		boxRepository.save(box1);
 		boxRepository.save(box2);
 		boxRepository.save(box3);
 		boxRepository.save(box4);
 
-		User florian = new User("florian", "florian");
-		User jakob = new User("jakob", "jakob");
-		User martin = new User("martin", "martin");
-
-		userRepository.save(florian);
-		userRepository.save(jakob);
-		userRepository.save(martin);
 
 	}
 
