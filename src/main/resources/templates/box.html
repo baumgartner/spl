@@ -7,62 +7,62 @@
 <link rel="stylesheet"
 	href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"></link>
 </head>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <body>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/SPB/locations">Locations</a></li>
+				<li class="breadcrumb-item"><a
+					th:href="'/SPB/locations/'+${location.id}"
+					th:text="${location.name}"></a></li>
+				<li class="breadcrumb-item active" aria-current="page"
+					th:text="${box.id}"></li>
+			</ol>
+		</nav>
 
-	<nav aria-label="breadcrumb">
-		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="/SPB/locations">Locations</a></li>
-			<li class="breadcrumb-item"><a
-				th:href="'/SPB/locations/'+${location.id}"
-				th:text="${location.name}"></a></li>
-			<li class="breadcrumb-item active" aria-current="page"
-				th:text="${box.id}"></li>
-		</ol>
-	</nav>
+		<div class="alert alert-success" th:if="${success}">
+			<strong>Success!</strong> Please open the box now.
+		</div>
+		<div class="alert alert-danger" th:if="${alert}">
+			<strong>Danger!</strong> Invalid code.
+		</div>
 
-	<div class="alert alert-success" th:if="${success}">
-		<strong>Success!</strong> Please open the box now.
-	</div>
-	<div class="alert alert-danger" th:if="${alert}">
-		<strong>Danger!</strong> Invalid code.
-	</div>
-
-	<form method="post"
-		th:action="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}+'/book'"
-		th:if="${box.status.name() == 'FREE'}">
-		<div class="form-group">
-			<div class="input-group">
-				<input type="text" class="form-control"
-					name="code" id="code" placeholder="Enter the Code" />
+		<form method="post"
+			th:action="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}+'/book'"
+			th:if="${box.status.name() == 'FREE'}">
+			<div class="form-group">
+				<div class="input-group">
+					<input type="text" class="form-control"
+						name="code" id="code" placeholder="Enter the Code" />
+				</div>
 			</div>
-		</div>
 
-		<div class="form-group">
-			<input type="submit" class="form-control" name="Buchen" id="confirm"
-				value="Book" />
+			<div class="form-group">
+				<input type="submit" class="form-control" name="Buchen" id="confirm"
+					value="Book" />
 
-		</div>
-	</form>
-
-	<form method="post"
-		th:action="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}+'/unlock'"
-		th:if="${box.status.name() == 'BOOKED'}">
-		<div class="form-group">
-			<div class="input-group">
-				<input type="text" class="form-control"
-					name="code" id="code" placeholder="Enter the Code" />
 			</div>
-		</div>
+		</form>
 
-		<div class="form-group">
-			<input type="submit" class="form-control" name="Unlock" id="confirm"
-				value="Unlock" />
+		<form method="post"
+			th:action="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}+'/unlock'"
+			th:if="${box.status.name() == 'BOOKED'}">
+			<div class="form-group">
+				<div class="input-group">
+					<input type="text" class="form-control"
+						name="code" id="code" placeholder="Enter the Code" />
+				</div>
+			</div>
 
-		</div>
-	</form>
+			<div class="form-group">
+				<input type="submit" class="form-control" name="Unlock" id="confirm"
+					value="Unlock" />
 
-	<a th:if="${box.status.name() == 'DEPOSIT'}"
-		th:href="'/SPB/locations/'+${location.id}">Back to Location</a>
+			</div>
+		</form>
 
+		<a th:if="${box.status.name() == 'DEPOSIT'}"
+			th:href="'/SPB/locations/'+${location.id}">Back to Location</a>
+	</div>
 </body>
 </html>
