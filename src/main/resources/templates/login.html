@@ -1,28 +1,49 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>SPB - Smart Public Boxes</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"></link>
+<title>SPB - Smart Public Boxes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"></link>
 </head>
 <body>
 	<nav aria-label="breadcrumb">
-	  <ol class="breadcrumb">
-	    <li class="breadcrumb-item active" aria-current="page">Login</li>
-	  </ol>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item active" aria-current="page">Login</li>
+		</ol>
 	</nav>
-    <body>
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
-    </body>
+<body>
+	<div th:if="${param.error}">Invalid username and password.</div>
+	<div th:if="${param.logout}">You have been logged out.</div>
+	
+	<form th:action="@{/login}" method="post">
+		<div class="form-group">
+			<div class="cols-sm-10">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-user fa"
+						aria-hidden="true"></i></span> <input type="text" class="form-control"
+						name="username" id="username" placeholder="Username" />
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="cols-sm-10">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-user fa"
+						aria-hidden="true"></i></span> <input type="password"
+						class="form-control" name="password" id="password"
+						placeholder="Password" />
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<input type="submit" class="form-control" id="confirm"
+				value="Login" />
+
+		</div>
+	</form>
+</body>
 </html>
