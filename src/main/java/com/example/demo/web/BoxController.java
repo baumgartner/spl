@@ -29,6 +29,8 @@ public class BoxController {
 		Box box = boxRepository.findByIdAndLocationId(boxId, locationId);
 
 		logger.info("box: {}", box);
+		
+		action.put("state", box.getStatus().name());
 
 		return action;
 	}
