@@ -1,9 +1,17 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>Spring Security Example </title>
-    </head>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SPB - Smart Public Boxes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"></link>
+</head>
+<body>
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item active" aria-current="page">Login</li>
+	  </ol>
+	</nav>
     <body>
         <div th:if="${param.error}">
             Invalid username and password.
