@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
@@ -25,6 +26,9 @@ public class Location {
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "location")
 	private Collection<Box> boxes;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private User owner;
 
 	public int getFreeBoxes() {
 		return getBoxes(BoxStatus.FREE).size();

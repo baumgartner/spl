@@ -1,14 +1,11 @@
 package com.example.demo.dao;
 
-import java.util.Collection;
-
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,7 +27,6 @@ public class Box {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Location location;
-	@ManyToOne(fetch = FetchType.EAGER)
-	private User owner;
+
 
 }
