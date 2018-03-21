@@ -17,22 +17,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Location {
-	
-	
 
 	@Id
 	private String id;
-	
+
 	private String name;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy="location")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "location")
 	private Collection<Box> boxes;
-	
+
 	public int getFreeBoxes() {
 		return getBoxes(BoxStatus.FREE).size();
 	}
-	
+
 	private Collection<Box> getBoxes(BoxStatus status) {
-		return boxes.stream().filter( box -> status.equals(box.getStatus())).collect(Collectors.toList());
+		return boxes.stream().filter(box -> status.equals(box.getStatus())).collect(Collectors.toList());
 	}
 }
