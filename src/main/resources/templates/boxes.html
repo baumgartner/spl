@@ -7,7 +7,13 @@
     <link rel="stylesheet" href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"></link>
 </head>
 <body>
-   <div th:insert="locationHeader"></div>
+  
+   <nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="/SPB/locations">Locations</a></li>
+	    <li class="breadcrumb-item active" aria-current="page" th:text="${location.name}"></li>
+	  </ol>
+	</nav>
     
     <table class="table table-hover">
     <tr>

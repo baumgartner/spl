@@ -50,7 +50,7 @@ public class OverviewController {
 		Box box = loadBox(boxId, model);
 		// TODO: create BookEntry
 	
-		BookEntry bookEntry = new BookEntry(null, box, getLoggedInUser());
+		BookEntry bookEntry = new BookEntry(null, box, getLoggedInUser(), code);
 		
 		bookEntryRepository.save(bookEntry);
 		box.setStatus(BoxStatus.DEPOSIT);
