@@ -123,11 +123,18 @@ public class OverviewController {
 	}
 
 	@GetMapping("/SPB/locations/{locationId}/boxes/{boxId}")
-	public String box(@PathVariable String locationId, @PathVariable String boxId, Model model) {
+	public String box(@PathVariable String locationId, @PathVariable String boxId, Model model, Principal principal) {
 		loadLocation(locationId, model);
 		loadBox(boxId, model);
+		loadCurrentUser(model, principal);
 		
 		return "box";
+	}
+
+	private void loadCurrentUser(Model model, Principal principal) {
+		User loggedInUser = getLoggedInUser(principal);
+		
+		model.addAttribute("currentUser", loggedInUser);
 	}
 
 	private Location loadLocation(String locationId, Model model) {

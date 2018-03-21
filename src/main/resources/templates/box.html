@@ -52,7 +52,7 @@
 		<form method="post"
 			th:action="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}+'/unlock'"
 			th:if="${box.status.name() == 'BOOKED'}">
-			<div class="form-group">
+			<div class="form-group" th:if="${!currentUser.equals(location.owner)}">
 				<div class="input-group">
 					<input type="text" class="form-control"
 						name="code" id="code" placeholder="Enter the Code" />
