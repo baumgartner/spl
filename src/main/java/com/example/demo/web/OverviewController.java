@@ -21,87 +21,98 @@ import com.example.demo.repository.UserRepository;
 
 @Controller
 public class OverviewController {
-	
+
 	Logger logger = LoggerFactory.getLogger(getClass());
-	
+
 	@Autowired
 	private BoxRepository boxRepository;
-	
+
 	@Autowired
 	private LocationRepository locationRepository;
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private BookEntryRepository bookEntryRepository;
-		
+
 	@PostMapping("/login")
-	public String login(@RequestParam(name = "username", required = true) String username, 
-			@RequestParam(name = "password", required = true) String password,
-			Model model) {
+	public String login(@RequestParam(name = "username", required = true) String username,
+			@RequestParam(name = "password", required = true) String password, Model model) {
 		return "success";
 	}
-	
+
 	@PostMapping("/SPB/locations/{locationId}/boxes/{boxId}/book")
-	public String book(@PathVariable String locationId,
-			@PathVariable String boxId,
+	public String book(@PathVariable String locationId, @PathVariable String boxId,
 			@RequestParam(name = "code", required = true) String code, Model model) {
 		Location location = loadLocation(locationId, model);
 		Box box = loadBox(boxId, model);
 		// TODO: create BookEntry
-		// 
+		//
+
+		// ONSUCCESS
+		model.addAttribute("success", "Booked");
+
+		// ONERROR
+		// model.addAttribute("alert", "alert");
+
 		return "box";
 	}
-	
+
 	@PostMapping("/SPB/locations/{locationId}/boxes/{box}/unlock")
-	public String unlock(@PathVariable String locationId,
-			@PathVariable String box,
+	public String unlock(@PathVariable String locationId, @PathVariable String box,
 			@RequestParam(name = "code", required = true) String code, Model model) {
-		
+
 		Location location = loadLocation(locationId, model);
-		
+		model.addAttribute("alert", "Invalid Code inserted");
 		// TODO: check if box has a pendingt BookEntry
 		// TODO: check Code
-		// TODO: send 
+		// TODO: send
 		// TODO: finish booking
-		return "unlock";
+
+		// ONSUCCESS
+		model.addAttribute("success", "Booked");
+
+		// ONERROR
+		// model.addAttribute("alert", "alert");
+
+		return "box";
 	}
-	
+
 	@GetMapping("/SPB/locations")
 	public String locations(Model model) {
 		model.addAttribute("locations", locationRepository.findAll());
-		
+
 		return "locations";
 	}
-		
+
 	@GetMapping("/SPB/locations/{locationId}")
 	public String location(@PathVariable String locationId, Model model) {
-		Location location = loadLocation(locationId, model);	
+		Location location = loadLocation(locationId, model);
 		logger.info("LOCATION- Boxes: " + location.getBoxes().size());
 		return "boxes";
 	}
-	
+
 	@GetMapping("/SPB/locations/{locationId}/boxes/{boxId}")
 	public String box(@PathVariable String locationId, @PathVariable String boxId, Model model) {
-		Location location = loadLocation(locationId, model);	
+		Location location = loadLocation(locationId, model);
 		Box box = loadBox(boxId, model);
 		return "box";
 	}
-	
+
 	private Location loadLocation(String locationId, Model model) {
 		final Location location = locationRepository.findById(locationId).get();
 
 		model.addAttribute("location", location);
-		
+
 		return location;
 	}
-	
+
 	private Box loadBox(String boxId, Model model) {
 		final Box box = boxRepository.findById(boxId).get();
-		
+
 		model.addAttribute("box", box);
-		
+
 		return box;
 	}
 }
