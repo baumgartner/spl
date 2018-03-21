@@ -8,7 +8,6 @@
 </head>
 <body>
    <div th:insert="locationHeader"></div>
-    <p th:text="'currently we have ' + ${location.boxes.size()} + ' boxes'" />
     
     <table class="table table-hover">
     <tr>
@@ -19,7 +18,11 @@
      <tr th:each="box: ${location.boxes}">
       <td th:text="${box.id}"></td>
       <td th:text="${box.status}"></td>
-      <td><a th:href="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}">Book</a></td>
+      <td th:switch="${box.status.name()}">
+      	<a th:case="FREE" th:href="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}">Book</a>
+      	<a th:case="BOOKED" th:href="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}">Unlock</a>
+      	<p th:case="*" th:text="UNAVAILABLE" /> 
+      </td>
     </tr>
     </table>
 </body>

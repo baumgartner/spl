@@ -1,7 +1,5 @@
 package com.example.demo.web;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.dao.BookEntry;
 import com.example.demo.dao.Box;
+import com.example.demo.dao.BoxStatus;
 import com.example.demo.dao.Location;
+import com.example.demo.dao.User;
 import com.example.demo.repository.BookEntryRepository;
 import com.example.demo.repository.BoxRepository;
 import com.example.demo.repository.LocationRepository;
@@ -48,8 +49,12 @@ public class OverviewController {
 		Location location = loadLocation(locationId, model);
 		Box box = loadBox(boxId, model);
 		// TODO: create BookEntry
-		//
-
+	
+		BookEntry bookEntry = new BookEntry(null, box, getLoggedInUser());
+		
+		bookEntryRepository.save(bookEntry);
+		box.setStatus(BoxStatus.DEPOSIT);
+		
 		// ONSUCCESS
 		model.addAttribute("success", "Booked");
 
@@ -57,6 +62,10 @@ public class OverviewController {
 		// model.addAttribute("alert", "alert");
 
 		return "box";
+	}
+
+	private User getLoggedInUser() {
+		return userRepository.findById("florian").get();
 	}
 
 	@PostMapping("/SPB/locations/{locationId}/boxes/{box}/unlock")
@@ -97,6 +106,7 @@ public class OverviewController {
 	public String box(@PathVariable String locationId, @PathVariable String boxId, Model model) {
 		Location location = loadLocation(locationId, model);
 		Box box = loadBox(boxId, model);
+		
 		return "box";
 	}
 

@@ -11,13 +11,13 @@
 	<div th:insert="locationHeader"></div>
 	<div th:insert="boxHeader"></div>
 	<div class="alert alert-success" th:if="${success}">
-		<strong>Success!</strong> Indicates a successful or positive action.
+		<strong>Success!</strong> Please open the box now.
 	</div>
 	<div class="alert alert-danger" th:if="${alert}">
-		<strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+		<strong>Danger!</strong> Invalid code.
 	</div>
-	<form method="post"
-		th:action="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}+'/' +${box.status.name() == 'FREE' ? 'book' : 'unlock'}">
+	
+	<form method="post" th:action="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}+'/book'}" th:if="${box.status.name() == 'FREE'}">
 		<div class="form-group">
 			<div class="cols-sm-10">
 				<div class="input-group">
@@ -28,11 +28,29 @@
 			</div>
 		</div>
 
-		<div class="form-group" th:switch="${box.status.name()}">
-			<input th:case="BOOKED" type="submit" class="form-control"
-				name="Buchen" id="confirm" value="Unlock" /> <input th:case="FREE"
+		<div class="form-group">
+			<input th:case="FREE"
 				type="submit" class="form-control" name="Buchen" id="confirm"
 				value="Book" />
+			
+		</div>
+	</form>
+	
+	<form method="post" th:action="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}+'/unlock'}" th:if="${box.status.name() == 'BOOKED'}">
+		<div class="form-group">
+			<div class="cols-sm-10">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-user fa"
+						aria-hidden="true"></i></span> <input type="text" class="form-control"
+						name="code" id="code" placeholder="Enter the Code" />
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<input type="submit" class="form-control"
+				name="Buchen" id="confirm" value="Unlock" />
+			
 		</div>
 	</form>
 
