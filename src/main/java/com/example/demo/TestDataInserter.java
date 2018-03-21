@@ -20,6 +20,7 @@ public class TestDataInserter implements InitializingBean {
 
 	@Autowired
 	private LocationRepository locationRepository;
+	
 	@Autowired
 	private BoxRepository boxRepository;
 	@Autowired
