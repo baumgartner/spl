@@ -78,16 +78,18 @@ public class OverviewController {
 		return userRepository.findById(principal.getName()).get();
 	}
 
+	@GetMapping("SPB/locations/{locationId}/boxes/{boxId}/unlock")
 	@PostMapping("/SPB/locations/{locationId}/boxes/{boxId}/unlock")
 	public String unlock(@PathVariable String locationId, @PathVariable String boxId,
-			@RequestParam(name = "code", required = true) String code, Model model) {
+			@RequestParam(name = "code") String code, Model model, Principal principal) {
 
-		loadLocation(locationId, model);
+		Location location = loadLocation(locationId, model);
 		Box box = loadBox(boxId, model);
+		User user = getLoggedInUser(principal);
 		
 		BookEntry bookEntry = bookEntryRepository.findByBoxAndStatus(box, BookEntryStatus.RUNNING);
 		
-		if (bookEntry.getPin().equals(code)) {
+		if (user.equals(location.getOwner()) || bookEntry.getPin().equals(code)) {
 			box.setStatus(BoxStatus.FREE);
 			boxRepository.save(box);
 			

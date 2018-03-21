@@ -73,7 +73,7 @@ public class BoxController {
 				boxRepository.save(box);
 			} else if(BoxStatus.FREE.equals(box.getStatus())) {
 				Location location = locationRepository.findById(locationId).get();
-				BookEntry bookEntry = new BookEntry(null, box ,new Timestamp(System.currentTimeMillis()), null, location.getOwner(), "", BookEntryStatus.RUNNING);
+				BookEntry bookEntry = new BookEntry(null, box , new Timestamp(System.currentTimeMillis()), null, location.getOwner(), "", BookEntryStatus.RUNNING);
 
 				bookEntry.setFromDate(new Date());
 				bookEntryRepository.save(bookEntry);
