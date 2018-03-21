@@ -8,13 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.BookEntry;
 import com.example.demo.dao.BookEntryStatus;
@@ -52,7 +50,7 @@ public class OverviewController {
 	@PostMapping("/SPB/locations/{locationId}/boxes/{boxId}/book")
 	public String book(@PathVariable String locationId, @PathVariable String boxId,
 			@RequestParam(name = "code", required = true) String code, Model model, Principal principal) {
-		Location location = loadLocation(locationId, model);
+		loadLocation(locationId, model);
 		Box box = loadBox(boxId, model);
 
 		BookEntry bookEntry = new BookEntry(null, box ,new Timestamp(System.currentTimeMillis()), null, getLoggedInUser(principal), code, BookEntryStatus.RUNNING);
@@ -75,7 +73,7 @@ public class OverviewController {
 	public String unlock(@PathVariable String locationId, @PathVariable String boxId,
 			@RequestParam(name = "code", required = true) String code, Model model) {
 
-		Location location = loadLocation(locationId, model);
+		loadLocation(locationId, model);
 		Box box = loadBox(boxId, model);
 		
 		BookEntry bookEntry = bookEntryRepository.findByBoxAndStatus(box, BookEntryStatus.RUNNING);
@@ -113,8 +111,8 @@ public class OverviewController {
 
 	@GetMapping("/SPB/locations/{locationId}/boxes/{boxId}")
 	public String box(@PathVariable String locationId, @PathVariable String boxId, Model model) {
-		Location location = loadLocation(locationId, model);
-		Box box = loadBox(boxId, model);
+		loadLocation(locationId, model);
+		loadBox(boxId, model);
 		
 		return "box";
 	}
