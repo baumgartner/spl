@@ -1,0 +1,30 @@
+Welcome to our Project, Smart public and private Boxes. 
+
+Jeder kennt das Problem, man ist nicht zu Haus, und der Postler oder ein Freund kommt vorbei und will einem etwas vorbei bringen. 
+Was bleibt einem oft übrig als ein neuer Termin mit dem Freund oder der Arbeit dass man das Paket bei einem Lieferdienst abholen muss. 
+
+Wir sind der Meinung, dass wir hierfür die ultimative Lösung gefunden. 
+In unserem Projekt haben wir 2 Usecases umgesetzt, die Smart Public Box und die Smart Private Box. 
+Bei der Public Box ist es Firmen und Privatpersonen möglich, einer anderen Person ein Paket zu hinterlegen. 
+Diese Person kann die Smart Box mit einem Pin-Code öffnen. Bei der Smart Private Box, kann nur der Besitzer der Box das Paket entnehmen. 
+
+
+Wie dieser einfache Workflow aussieht, möchten wir euch gerne demonstrieren. Zunächst brauchen wir einen freiwilligen aus der Juri. 
+
+*Name*, möchtest du diese Flasche Club Mate in deiner Private oder deiner Public Box hinterlegt haben? 
+In welcher Public Box möchtest du die Flasche hinterlegt haben, beim Bahnhof oder am Hauptplatz? 
+Wie soll der Code der Public Box lauten? 
+
+
+
+Ein weiterer Freiwilliger. In welcher Smart-Box möchtest du diese Flasche Club Smart hinterlegt haben, 
+bei der Box ist der Status der LED bereits auf rot, du kannst also nur zwischen beiden grünen wählen. 
+
+
+* Freiwillige bitte auf die Bühne kommen. 
+Auf der Box befinden sich QR Codes, scannt man diese erhält man die URL wo der Entsperr-Code eingegeben werden kann. 
+
+* Entsperren der Boxen 
+Begleit-Text: Für die Steuerung der Boxen verwenden wir Gimasi IOT Boards, für das Webinterface & Backend eine Cloudfähige Spring Boot Anwendung. 
+Die Kommunikation zwischen den Smart Boxen und der Zentrale wird über Rest durchgeführt. Dank Cloud-Fähigkeit des Backends sollte die Smart-Boxes 
+auch in einer großen Anzahl gut skalieren, die Schnittstelle für die Kommunikation könnte auch auf MQTT umgerüstet werden. 
