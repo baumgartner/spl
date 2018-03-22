@@ -1,0 +1,43 @@
+Herzlich Willkommen, an dieser Stelle möchten wir euch unser Projekt der  Smart public and private Boxes vorstellen. 
+
+Ein bekanntes Problem, der Paketdienst oder ein Freund möchte uns etwas liefern, doch wir sind nicht in der Lage das Paket entgegen zu nehmen.
+Was bleibt anderes übrig als einen neuen Termin mit dem Freund zu vereinbaren oder das Paket bei einem Lieferdienst ab zu holen. 
+
+Unser Projekt, die Smart Box bietet die Möglichkeit des Austausch von physikalischen Gütern ohne dass sich beide Parteien persönlich begegnen müssen. 
+Zu diesem Zweck habe ich hier jetzt eine Flasche Club Mate vorbereitet und übergebe diese an meinen Kollegen XYZ welcher uns die Funktion der Smart Box 
+vorführen wird. 
+
+
+
+
+Wir zeigen hier die Lösung dieses Problems:
+In unserem Projekt haben wir 2 Usecases umgesetzt, die Smart Public Box und die Smart Private Box. 
+Bei der Public Box ist es Firmen und Privatpersonen möglich, einer anderen Person ein Paket zu hinterlegen. 
+Diese Person kann die Smart Box mit einem einfach übermittelten Pin-Code öffnen. Bei der Smart Private Box, kann nur der Besitzer der Box das Paket entnehmen. 
+
+
+// Wie dieser einfache Workflow aussieht, möchten wir euch gerne demonstrieren. Zunächst brauchen wir einen freiwilligen aus der Juri. 
+
+Die kinderleichten drei Schritte sind hier anschaulich erklärt:
+
+Zeigen der Funktion...
+
+*Name*, möchtest du diese Flasche Club Mate in deiner Private oder deiner Public Box hinterlegt haben? 
+In welcher Public Box möchtest du die Flasche hinterlegt haben, beim Bahnhof oder am Hauptplatz? 
+Wie soll der Code der Public Box lauten? 
+
+
+
+Ein weiterer Freiwilliger. In welcher Smart-Box möchtest du diese Flasche Club Smart hinterlegt haben, 
+bei der Box ist der Status der LED bereits auf rot, du kannst also nur zwischen beiden grünen wählen. 
+
+
+* Freiwillige bitte auf die Bühne kommen. 
+Auf der Box befinden sich QR Codes, scannt man diese erhält man die URL wo der Entsperr-Code eingegeben werden kann. 
+
+* Entsperren der Boxen 
+Begleit-Text: Für die Steuerung der Boxen verwenden wir Gimasi IOT Boards, für das Webinterface & Backend eine Cloudfähige Spring Boot Anwendung. 
+Die Kommunikation zwischen den Smart Boxen und der Zentrale wird über Rest durchgeführt. /*Dank Cloud-Fähigkeit des Backends sollte die Smart-Boxes 
+auch in einer großen Anzahl gut skalieren, die Schnittstelle für die Kommunikation könnte auch auf MQTT umgerüstet werden. */
+Sobald downlink auf NB-IOT möglich ist, kann die Anwendung auf einfachste Art und Weise transferiert werden. Der Use-Case wird dadurch noch günstiger, da mit geringster 
+Grundkonfiguration und mit günstigem Datentarif eine hochwerte Applikation generiert wird.
