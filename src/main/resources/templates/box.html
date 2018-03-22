@@ -34,7 +34,7 @@
 
 		<form method="post"
 			th:action="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}+'/book'"
-			th:if="${box.status.name() == 'FREE'}">
+			th:if="${box.status.name() == 'FREE' && !currentUser.equals(location.owner)}">
 			<div class="form-group">
 				<div class="input-group">
 					<input type="number" class="form-control"
@@ -66,8 +66,7 @@
 			</div>
 		</form>
 
-		<a th:if="${box.status.name() == 'DEPOSIT'}"
+		<a th:if="${box.status.name() == 'DEPOSIT' || (currentUser.equals(location.owner) && box.status.name() == 'FREE')}"
 			th:href="'/SPB/locations/'+${location.id}">Back to Location</a>
-	</div>
 </body>
 </html>

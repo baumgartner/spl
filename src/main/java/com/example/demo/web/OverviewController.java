@@ -78,14 +78,13 @@ public class OverviewController {
 		return userRepository.findById(principal.getName()).get();
 	}
 
-	@GetMapping("SPB/locations/{locationId}/boxes/{boxId}/unlock")
 	@PostMapping("/SPB/locations/{locationId}/boxes/{boxId}/unlock")
 	public String unlock(@PathVariable String locationId, @PathVariable String boxId,
-			@RequestParam(name = "code") String code, Model model, Principal principal) {
+			@RequestParam(name = "code", required = false) String code, Model model, Principal principal) {
 
 		Location location = loadLocation(locationId, model);
 		Box box = loadBox(boxId, model);
-		User user = getLoggedInUser(principal);
+		User user = loadCurrentUser(model, principal);
 		
 		BookEntry bookEntry = bookEntryRepository.findByBoxAndStatus(box, BookEntryStatus.RUNNING);
 		
@@ -110,31 +109,38 @@ public class OverviewController {
 	@GetMapping("/SPB/locations")
 	public String locations(Model model, Principal principal) {
 		logger.info("Principal: {}", principal.getName());
-		model.addAttribute("publicLocations", locationRepository.findAll());
+		model.addAttribute("publicLocations", locationRepository.findAllByOwnerIsNull());
 		model.addAttribute("privateLocations", locationRepository.findAllByOwner(getLoggedInUser(principal)));
 		return "locations";
 	}
 
 	@GetMapping("/SPB/locations/{locationId}")
-	public String location(@PathVariable String locationId, Model model) {
+	public String location(@PathVariable String locationId, Model model, Principal principal) {
 		Location location = loadLocation(locationId, model);
 		logger.info("LOCATION- Boxes: " + location.getBoxes().size());
+		loadCurrentUser(model, principal);
 		return "boxes";
 	}
 
 	@GetMapping("/SPB/locations/{locationId}/boxes/{boxId}")
 	public String box(@PathVariable String locationId, @PathVariable String boxId, Model model, Principal principal) {
-		loadLocation(locationId, model);
+		Location location = loadLocation(locationId, model);
 		loadBox(boxId, model);
-		loadCurrentUser(model, principal);
+		User user = loadCurrentUser(model, principal);
+		
+		if (location.getOwner() != null && !user.equals(location.getOwner())) {
+			return "redirect:/SPB/locations";
+		}
 		
 		return "box";
 	}
 
-	private void loadCurrentUser(Model model, Principal principal) {
+	private User loadCurrentUser(Model model, Principal principal) {
 		User loggedInUser = getLoggedInUser(principal);
 		
 		model.addAttribute("currentUser", loggedInUser);
+		
+		return loggedInUser;
 	}
 
 	private Location loadLocation(String locationId, Model model) {
