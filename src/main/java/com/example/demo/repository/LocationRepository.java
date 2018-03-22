@@ -13,4 +13,5 @@ public interface LocationRepository extends JpaRepository<Location, String>{
 	
 	Collection<Location> findAllByOwner(User user);
 
+	Collection<Location> findAllByOwnerIsNull();
 }

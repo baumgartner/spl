@@ -27,10 +27,11 @@
 			</tr>
 		</thead>
 		<tbody>
-		<tr th:each="box: ${location.boxes}" th:class="${box.status.css}">
-<!-- 			<tr th:each="box: ${location.boxes}" th:style="'background-color: ' + ${box.status.name() == 'FREE' ? '#dff0d8' : '#f2dede'}"> -->
-				<td th:if="${box.status.name() != 'DEPOSIT'}"><a th:text="${box.id}" th:href="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}"></a></td>
+			<tr th:each="box: ${location.boxes}" th:class="${box.status.css}">
+				<td th:if="${box.status.name() == 'FREE' and !currentUser.equals(location.owner)}"><a th:text="${box.id}" th:href="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}"></a></td>
+				<td th:if="${box.status.name() == 'BOOKED'}"><a th:text="${box.id}" th:href="'/SPB/locations/'+${location.id}+'/boxes/'+${box.id}"></a></td>
 				<td th:if="${box.status.name() == 'DEPOSIT'}" th:text="${box.id}"></td>
+				<td th:if="${box.status.name() == 'FREE' and currentUser.equals(location.owner)}" th:text="${box.id}"></td>
 				<td th:text="${box.status}"></td>
 			</tr>
 		</tbody>
