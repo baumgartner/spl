@@ -36,3 +36,30 @@ Die Kommunikation zwischen den Smart Boxen und der Zentrale wird über Rest durc
 auch in einer großen Anzahl gut skalieren, die Schnittstelle für die Kommunikation könnte auch auf MQTT umgerüstet werden. */
 Sobald downlink auf NB-IOT möglich ist, kann die Anwendung auf einfachste Art und Weise transferiert werden. Der Use-Case wird dadurch noch günstiger, da mit geringster 
 Grundkonfiguration und mit günstigem Datentarif eine hochwerte Applikation generiert wird.
+
+
+
+Person1 sitzt in der Arbeit. 
+* heute bekomme ich endlich das Paket von XY
+
+Zustelldienst kommt nach hause und legt das Paket ab, und sperrt zu
+
+Person1 kommt nach hause, scannt den Code, loggt sich ein und unlocked Box
+
+Person1 ist glücklich
+
+
+
+Use Case 2:
+
+Person1 ruft Person2 an: du kannst du mir bitte wenn du in die arbeit fährst am Bahnhof etwas hinterlegen
+Person2 kein Problem, ich sag dir dann welche Box und den Pin
+
+Person2 fährt zum bahnhof, wählt box, vergibt code und legt etwas rein
+SMS an Person1 (Box+Pin)
+
+Person1 fährt etwas später zum Bh geht zu Box, gibt pin am Handy ein und entnimmt etwas
+
+
+kann auf weitere geschäftsbereiche ausgeweitet werden.
+* Hotelzimmerbuchung
