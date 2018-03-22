@@ -32,16 +32,20 @@ SMS an Person1 (Box+Pin)
 Person1 fährt etwas später zum Bh geht zu Box, gibt pin am Handy ein und entnimmt etwas
 
 
+Für die Steuerung der Smartboxen verwenden wir Gimasi IOT Boards, für das Webinterface & Backend eine Cloudfähige Java Application.
+Die Kommunikation zwischen den Smart Boxen und der Zentrale wird über Rest durchgeführt, könnte bei Bedarf jedoch auch über MQTT durchgeführt werden.
 
-* Entsperren der Boxen 
-Begleit-Text: Für die Steuerung der Boxen verwenden wir Gimasi IOT Boards, für das Webinterface & Backend eine Cloudfähige Spring Boot Anwendung. 
-Die Kommunikation zwischen den Smart Boxen und der Zentrale wird über Rest durchgeführt. 
+Neben der bereits ganz guten Software welche im Rahmen des Hackathons entwicklt wurde, ist es natürlich offensichtlich dass eine Kartonschachtel als Box 
+und ein Schrittmotor als Schloss keine Production-Ready Hardware sind.
+
+Die Idee der Smart Box selbst wird jedoch nicht nur das Leben der St. Pöltner verbessern, sondern auch das Leben von Menschen in Städten und in ländlichen 
+Gegenden. 
 
 /*Dank Cloud-Fähigkeit des Backends sollte die Smart-Boxes 
 auch in einer großen Anzahl gut skalieren, die Schnittstelle für die Kommunikation könnte auch auf MQTT umgerüstet werden. */
 
-Sobald downlink auf NB-IOT möglich ist, kann die Anwendung auf einfachste Art und Weise transferiert werden. Der Use-Case wird dadurch noch günstiger, da mit geringster 
-Grundkonfiguration und mit günstigem Datentarif eine hochwerte Applikation generiert wird.
+/* Sobald downlink auf NB-IOT möglich ist, kann die Anwendung auf einfachste Art und Weise transferiert werden. Der Use-Case wird dadurch noch günstiger, da mit geringster 
+Grundkonfiguration und mit günstigem Datentarif eine hochwerte Applikation generiert wird.*/
 
 
 kann auf weitere geschäftsbereiche ausgeweitet werden.
